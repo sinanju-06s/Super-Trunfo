@@ -1,33 +1,37 @@
 #include "deck.h"
+#include<fstream>
+#include<string>
 using namespace std;
 
 Deck::Deck()
 {
-    count = 0;
-    head = 1;
     tail = 0;
+    head = 1;
+    count = 0;
 };
 
-void Deck::Append(Card x){
-    if (Full()){
-        cout<<"Limite Atingido"<<endl;
+void Deck::Append(Card x)
+{
+    if (Full())
+    {
+        cout << "Limite Atingido" << endl;
         abort();
     }
     count++;
-    tail = (tail%Maxt)+1;
+    tail = (tail % Maxt) + 1;
     deck_queue[tail] = x;
 }
 
 void Deck::Serve(Card &x)
 {
-    if (Empty()){
-        cout<<"Acabaram suas cartas"<<endl;
+    if (Empty())
+    {
+        cout << "Acabaram suas cartas" << endl;
         abort();
     }
     count--;
     x = deck_queue[head];
-    head = (head%Maxt)+1;
-    
+    head = (head % Maxt) + 1;
 }
 
 void Deck::debug()
@@ -36,7 +40,6 @@ void Deck::debug()
     {
         cout << deck_queue[i].model << endl;
     }
-    
 }
 bool Deck::Full()
 {
@@ -46,4 +49,8 @@ bool Deck::Full()
 bool Deck::Empty()
 {
     return (count == 0);
+}
+
+int Deck::Size(){
+    return count;
 }

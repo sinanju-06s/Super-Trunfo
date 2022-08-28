@@ -2,10 +2,34 @@
 #include "deck.h"
 #include<fstream>
 #include<string>
+//#include"card.h"
 
 using namespace std;
 
-void distribuir(Deck P1)
+void read_all_cards(Deck &n){
+    Card y;
+    ifstream Archive("./cards.csv",ios::in);
+    string tmp;
+    getline(Archive,tmp);
+    while(!Archive.eof()){
+        getline(Archive,tmp,',');
+        y.model = tmp;
+        getline(Archive,tmp,',');
+        y.curb_weigth= stoi(tmp);
+        getline(Archive,tmp,',');
+        y.engine_size = stoi(tmp);
+        getline(Archive,tmp,',');
+        y.horsePower = stoi(tmp);
+        getline(Archive,tmp,',');
+        y.price = stoi(tmp);
+        getline(Archive,tmp,'\n');
+        y.group = tmp;
+        n.Append(y);
+    }
+}
+
+
+/**void distribuir(Deck P1)
 {
     struct Deck::Card card_tmp;
     string tmp;
@@ -34,14 +58,13 @@ void distribuir(Deck P1)
     }
 
     P1.Append(card_tmp);
-}
+}*/
 
-int main()
-{
+int main(){
 
     Deck P1;
-
-    distribuir(P1);
-
+    read_all_cards(P1);
+    cout<<"Cartas no baralho: "<<P1.Size()<<endl;
+    
     return 0;
 }
