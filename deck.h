@@ -9,11 +9,6 @@ class Deck{
         int head;
         int tail;
         int count;
-        /*struct Card
-        {
-            string model, group;
-            int curb_weigth, engine_size , horsePower, price;
-        };*/
         struct Card deck_queue[Maxt+1];
     public:
         Deck();
@@ -23,4 +18,5 @@ class Deck{
         bool Full();
         int Size();
         void debug();
+        void Shuffle();
 };
