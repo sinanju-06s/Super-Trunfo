@@ -22,7 +22,8 @@ void read_all_cards(Deck &n){
         getline(Archive,tmp,',');
         y.price = stoi(tmp);
         getline(Archive,tmp,'\n');
-        y.group = tmp;
+        y.group = tmp.substr(0,tmp.size()-1);
+
         n.Append(y);
     }
 }
