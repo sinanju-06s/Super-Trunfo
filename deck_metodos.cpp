@@ -1,6 +1,7 @@
 #include "deck.h"
 #include<fstream>
 #include<string>
+#include<fstream>
 #include<stdlib.h>
 #include<time.h>
 
@@ -12,6 +13,33 @@ Deck::Deck()
     head = 1;
     count = 0;
 };
+
+void Deck::ReadFile()
+{
+    Card temp_card;
+    ifstream Archive("./cards.csv",ios::in);
+    string tmp;
+
+    getline(Archive,tmp);
+
+    while(!Archive.eof()){
+        getline(Archive,tmp,',');
+        temp_card.model = tmp;
+        getline(Archive,tmp,',');
+        temp_card.curb_weigth= stoi(tmp);
+        getline(Archive,tmp,',');
+        temp_card.engine_size = stoi(tmp);
+        getline(Archive,tmp,',');
+        temp_card.horsePower = stoi(tmp);
+        getline(Archive,tmp,',');
+        temp_card.price = stoi(tmp);
+        getline(Archive,tmp,'\n');
+        temp_card.group = tmp.substr(0,tmp.size()-1);
+        
+        Append(temp_card);
+    }
+}
+
 
 void Deck::Shuffle()
 {

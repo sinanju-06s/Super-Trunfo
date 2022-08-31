@@ -1,8 +1,12 @@
 #include <iostream>
 #include <string>
-#include "card.h"
 using namespace std;
 const int Maxt = 32;
+
+struct Card{
+    string model, group;
+    int curb_weigth, engine_size , horsePower, price;
+    }; 
 
 class Deck{
     private:
@@ -19,4 +23,5 @@ class Deck{
         int Size();
         void debug();
         void Shuffle();
+        void ReadFile();
 };
