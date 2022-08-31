@@ -16,7 +16,8 @@ Deck::Deck()
 
 void Deck::ReadFile()
 {
-    Card temp_card;
+    Card temp_card,deck_suffle[32];
+    int i = 0;
     ifstream Archive("./cards.csv",ios::in);
     string tmp;
 
@@ -36,27 +37,33 @@ void Deck::ReadFile()
         getline(Archive,tmp,'\n');
         temp_card.group = tmp.substr(0,tmp.size()-1);
         
-        Append(temp_card);
+        deck_suffle[i] = temp_card;
+        i++;
     }
+    Shuffle(deck_suffle);
 }
 
 
-void Deck::Shuffle()
+void Deck::Shuffle(Card deck_shuffle[])
 {
-    struct Card temp_card1,temp_card2;
-    int x,y;  
+    Card temp_deck[32],temp_card;   
+    int x = 0;
     srand(time(NULL));
 
-    for(int i = 1; i < 128; i++)
+    for(int i = 0; i < 32; i++)
     {   
-        x = rand() % 32 + 1;
-        y = rand() % 32 + 1;
-        if(x == y) {i--; continue;}
+        x = rand() % 32;
+        temp_card = deck_shuffle[x];
+        for(int j = 0;j<i;j++)
+        {
+            if(temp_deck[j].model == temp_card.model)
+            {
+                i --;
+                break;
+            }
+        }
+        temp_deck[i] = temp_card;
 
-        temp_card1 = deck_queue[x];
-        temp_card2 = deck_queue[y];
-        deck_queue[x] = temp_card2;
-        deck_queue[y] = temp_card1;
     }
 }
 

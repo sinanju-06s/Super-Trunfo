@@ -22,6 +22,6 @@ class Deck{
         bool Full();
         int Size();
         void debug();
-        void Shuffle();
+        void Shuffle(Card deck_shuffle[]);
         void ReadFile();
 };
