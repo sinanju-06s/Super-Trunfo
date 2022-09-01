@@ -14,6 +14,11 @@ class Deck{
         int tail;
         int count;
         struct Card deck_queue[Maxt+1];
+
+        
+        void Divide(Deck &P1, Deck &CP);
+        void Shuffle(Card deck_shuffle[],Deck &P1, Deck &CP);
+
     public:
         Deck();
         void Append(Card x);
@@ -22,6 +27,5 @@ class Deck{
         bool Full();
         int Size();
         void debug();
-        void Shuffle(Card deck_shuffle[]);
-        void ReadFile();
+        void ReadFile(Deck &P1, Deck &CP);
 };
