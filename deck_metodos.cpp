@@ -46,24 +46,31 @@ void Deck::ReadFile()
 
 void Deck::Shuffle(Card deck_shuffle[])
 {
-    Card temp_deck[32],temp_card;   
+    bool insert;
     int x = 0;
     srand(time(NULL));
-
-    for(int i = 0; i < 32; i++)
-    {   
+    for(int i = 0; i <32; i++)
+    {
         x = rand() % 32;
-        temp_card = deck_shuffle[x];
-        for(int j = 0;j<i;j++)
+        insert = false;
+
+        while(!insert)
         {
-            if(temp_deck[j].model == temp_card.model)
+            if(x == 32)
             {
-                i --;
-                break;
+                x = 0;
+            }
+            if(deck_shuffle[x].group == "00")
+            {
+                x++;
+            } 
+            else 
+            {
+                Append(deck_shuffle[x]);
+                deck_shuffle[x].group = "00";
+                insert = true;
             }
         }
-        temp_deck[i] = temp_card;
-
     }
 }
 
