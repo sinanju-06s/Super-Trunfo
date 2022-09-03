@@ -5,8 +5,8 @@ const int Maxt = 32;
 
 struct Card{
     string model, group;
-    int curb_weigth, engine_size , horsePower, price;
-    }; 
+    int curb_weigth, engine_size , horsepower, price;
+}; 
 
 class Deck{
     private:
