@@ -69,6 +69,145 @@ bool CheckTrunfo(Card X, Card Y){
     }else return false;
 }
 
+void TrunfoRound(Deck &P1,Deck &CPU, Card &P1_Card, Card &CPU_Card,bool &turno){
+    cout<<"Player Card: "<<P1_Card.group<<endl;
+    cout<<"CPU Card: "<<CPU_Card.group<<endl;
+    if(P1_Card.group == "1A"){
+        if(CPU_Card.group[1] == 'A'){
+            cout<<"A carta trunfo perdeu"<<endl;
+            cout<<"Vencedor da rodada: CPU"<<endl;
+            CPU.Append(P1_Card);
+            CPU.Append(CPU_Card);
+        }else{
+            cout<<"A carta trunfo ganhou"<<endl;
+            cout<<"Vencedor da rodada: Player"<<endl;
+            P1.Append(CPU_Card);
+            P1.Append(P1_Card);
+        }
+    }else{
+        if(P1_Card.group[1] == 'A'){
+            cout<<"A carta trunfo perdeu"<<endl;
+            cout<<"Vencedor da rodada: Player"<<endl;
+            P1.Append(CPU_Card);
+            P1.Append(P1_Card);
+        }else{
+            cout<<"A carta trunfo ganhou"<<endl;
+            cout<<"Vencedor da rodada: CPU"<<endl;
+            CPU.Append(P1_Card);
+            CPU.Append(CPU_Card);
+        }
+    }
+    if (turno==0) turno = 1;
+    else turno = 0;
+}
+
+void RegularRound(Deck &P1,Deck &CPU, Card &P1_Card, Card &CPU_Card,bool &turno){
+    int player_choice;
+    string tmp;
+
+    if (turno == 0){
+        cout<<"Rodada do Player"<<endl;
+        cin>>player_choice;
+        switch(player_choice){
+            case 1:
+                cout<<"Opção Escolhida: Curb-Weigth"<<endl;
+                cout<<"Player:"<<P1_Card.curb_weigth<<endl;
+                cout<<"CPU:"<<CPU_Card.curb_weigth<<endl;
+                if(P1_Card.curb_weigth > CPU_Card.curb_weigth){
+                    cout<<"Player ganhou a rodada"<<endl;
+                    P1.Append(CPU_Card);
+                    P1.Append(P1_Card);
+                }else{
+                    cout<<"CPU ganhou a rodada"<<endl;
+                    CPU.Append(P1_Card);
+                    CPU.Append(CPU_Card);
+                }
+                break;
+            case 2:
+                cout<<"Opção Escolhida: Engine-Size"<<endl;
+                cout<<"Player:"<<P1_Card.engine_size<<endl;
+                cout<<"CPU:"<<CPU_Card.engine_size<<endl;
+                if(P1_Card.engine_size > CPU_Card.engine_size){
+                    cout<<"Player ganhou a rodada"<<endl;
+                    P1.Append(CPU_Card);
+                    P1.Append(P1_Card);
+                }else{
+                    cout<<"CPU ganhou a rodada"<<endl;
+                    CPU.Append(P1_Card);
+                    CPU.Append(CPU_Card);
+                }
+                break;
+            case 3:
+                cout<<"Opção Escolhida: Horsepower"<<endl;
+                cout<<"Player:"<<P1_Card.horsepower<<endl;
+                cout<<"CPU:"<<CPU_Card.horsepower<<endl;
+                if(P1_Card.horsepower > CPU_Card.horsepower){
+                    cout<<"Player ganhou a rodada"<<endl;
+                    P1.Append(CPU_Card);
+                    P1.Append(P1_Card);
+                }else{
+                    cout<<"CPU ganhou a rodada"<<endl;
+                    CPU.Append(P1_Card);
+                    CPU.Append(CPU_Card);
+                }
+                break;
+        }
+        turno = 1;
+        setbuf(stdin,NULL);
+    }else{
+        cout<<"Rodada da CPU"<<endl;
+        cout<<"USANDO CIN APENAS PARA SABER O QUE ESTÁ ACONTECENDO"<<endl;
+        cin>>tmp;
+        int CPU_choice;
+        CPU_choice = rand()%3 + 1;
+        switch(CPU_choice){
+            case 1:
+                cout<<"Opção Escolhida: Curb-Weigth"<<endl;
+                cout<<"Player:"<<P1_Card.curb_weigth<<endl;
+                cout<<"CPU:"<<CPU_Card.curb_weigth<<endl;
+                if(P1_Card.curb_weigth > CPU_Card.curb_weigth){
+                    cout<<"Player ganhou a rodada"<<endl;
+                    P1.Append(CPU_Card);
+                    P1.Append(P1_Card);
+                }else{
+                    cout<<"CPU ganhou a rodada"<<endl;
+                    CPU.Append(P1_Card);
+                    CPU.Append(CPU_Card);
+                }
+                break;
+            case 2:
+                cout<<"Opção Escolhida: Engine-Size"<<endl;
+                cout<<"Player:"<<P1_Card.engine_size<<endl;
+                cout<<"CPU:"<<CPU_Card.engine_size<<endl;
+                if(P1_Card.engine_size > CPU_Card.engine_size){
+                    cout<<"Player ganhou a rodada"<<endl;
+                    P1.Append(CPU_Card);
+                    P1.Append(P1_Card);
+                }else{
+                    cout<<"CPU ganhou a rodada"<<endl;
+                    CPU.Append(P1_Card);
+                    CPU.Append(CPU_Card);
+                }
+                break;
+            case 3:
+                cout<<"Opção Escolhida: Horsepower"<<endl;
+                cout<<"Player:"<<P1_Card.horsepower<<endl;
+                cout<<"CPU:"<<CPU_Card.horsepower<<endl;
+                if(P1_Card.horsepower > CPU_Card.horsepower){
+                    cout<<"Player ganhou a rodada"<<endl;
+                    P1.Append(CPU_Card);
+                    P1.Append(P1_Card);
+                }else{
+                    cout<<"CPU ganhou a rodada"<<endl;
+                    CPU.Append(P1_Card);
+                    CPU.Append(CPU_Card);
+                }
+                break;
+        }
+        turno = 0;
+    }
+}
+
 void StartGame(Deck &P1, Deck &CPU){
     Card P1_Card, CPU_Card;
     int player_choice;
@@ -79,129 +218,9 @@ void StartGame(Deck &P1, Deck &CPU){
         CPU.Serve(CPU_Card);
         ShowAllAtributes(P1_Card);
         if(!CheckTrunfo(P1_Card,CPU_Card)){
-            if (turno == 0){
-                cout<<"Rodada do Player"<<endl;
-                cin>>player_choice;
-                switch(player_choice){
-                case 1:
-                    cout<<"Opção Escolhida: Curb-Weigth"<<endl;
-                    cout<<"Player:"<<P1_Card.curb_weigth<<endl;
-                    cout<<"CPU:"<<CPU_Card.curb_weigth<<endl;
-                    if(P1_Card.curb_weigth > CPU_Card.curb_weigth){
-                        cout<<"Player ganhou a rodada"<<endl;
-                        P1.Append(CPU_Card);
-                        P1.Append(P1_Card);
-                    }else{
-                        cout<<"CPU ganhou a rodada"<<endl;
-                        CPU.Append(P1_Card);
-                        CPU.Append(CPU_Card);
-                    }
-                case 2:
-                    cout<<"Opção Escolhida: Engine-Size"<<endl;
-                    cout<<"Player:"<<P1_Card.engine_size<<endl;
-                    cout<<"CPU:"<<CPU_Card.engine_size<<endl;
-                    if(P1_Card.engine_size > CPU_Card.engine_size){
-                        cout<<"Player ganhou a rodada"<<endl;
-                        P1.Append(CPU_Card);
-                        P1.Append(P1_Card);
-                    }else{
-                        cout<<"CPU ganhou a rodada"<<endl;
-                        CPU.Append(P1_Card);
-                        CPU.Append(CPU_Card);
-                    }
-                case 3:
-                    cout<<"Opção Escolhida: Horsepower"<<endl;
-                    cout<<"Player:"<<P1_Card.horsepower<<endl;
-                    cout<<"CPU:"<<CPU_Card.horsepower<<endl;
-                    if(P1_Card.horsepower > CPU_Card.horsepower){
-                        cout<<"Player ganhou a rodada"<<endl;
-                        P1.Append(CPU_Card);
-                        P1.Append(P1_Card);
-                    }else{
-                        cout<<"CPU ganhou a rodada"<<endl;
-                        CPU.Append(P1_Card);
-                        CPU.Append(CPU_Card);
-                    }
-                }
-                turno = 1;
-                setbuf(stdin,NULL);
-            }else{
-                cout<<"Rodada da CPU"<<endl;
-                int CPU_choice;
-                CPU_choice = rand()%3 + 1;
-                switch(CPU_choice){
-                    case 1:
-                        cout<<"Opção Escolhida: Curb-Weigth"<<endl;
-                        cout<<"Player:"<<P1_Card.curb_weigth<<endl;
-                        cout<<"CPU:"<<CPU_Card.curb_weigth<<endl;
-                        if(P1_Card.curb_weigth > CPU_Card.curb_weigth){
-                            cout<<"Player ganhou a rodada"<<endl;
-                            P1.Append(CPU_Card);
-                            P1.Append(P1_Card);
-                        }else{
-                            cout<<"CPU ganhou a rodada"<<endl;
-                            CPU.Append(P1_Card);
-                            CPU.Append(CPU_Card);
-                        }
-                    case 2:
-                        cout<<"Opção Escolhida: Engine-Size"<<endl;
-                        cout<<"Player:"<<P1_Card.engine_size<<endl;
-                        cout<<"CPU:"<<CPU_Card.engine_size<<endl;
-                        if(P1_Card.engine_size > CPU_Card.engine_size){
-                            cout<<"Player ganhou a rodada"<<endl;
-                            P1.Append(CPU_Card);
-                            P1.Append(P1_Card);
-                        }else{
-                            cout<<"CPU ganhou a rodada"<<endl;
-                            CPU.Append(P1_Card);
-                            CPU.Append(CPU_Card);
-                        }
-                    case 3:
-                        cout<<"Opção Escolhida: Horsepower"<<endl;
-                        cout<<"Player:"<<P1_Card.horsepower<<endl;
-                        cout<<"CPU:"<<CPU_Card.horsepower<<endl;
-                        if(P1_Card.horsepower > CPU_Card.horsepower){
-                            cout<<"Player ganhou a rodada"<<endl;
-                            P1.Append(CPU_Card);
-                            P1.Append(P1_Card);
-                        }else{
-                            cout<<"CPU ganhou a rodada"<<endl;
-                            CPU.Append(P1_Card);
-                            CPU.Append(CPU_Card);
-                        }
-                }
-                turno = 0;
-            }
+            RegularRound(P1,CPU,P1_Card,CPU_Card,turno);
         }else{
-            cout<<"Player Card: "<<P1_Card.group<<endl;
-            cout<<"CPU Card: "<<CPU_Card.group<<endl;
-            if(P1_Card.group == "1A"){
-                if(CPU_Card.group[1] == 'A'){
-                    cout<<"A carta trunfo perdeu"<<endl;
-                    cout<<"Vencedor da rodada: CPU"<<endl;
-                    CPU.Append(P1_Card);
-                    CPU.Append(CPU_Card);
-                }else{
-                    cout<<"A carta trunfo ganhou"<<endl;
-                    cout<<"Vencedor da rodada: Player"<<endl;
-                    P1.Append(CPU_Card);
-                    P1.Append(P1_Card);
-                }
-            }else{
-                if(P1_Card.group[1] == 'A'){
-                    cout<<"A carta trunfo perdeu"<<endl;
-                    cout<<"Vencedor da rodada: Player"<<endl;
-                    P1.Append(CPU_Card);
-                    P1.Append(P1_Card);
-                }else{
-                    cout<<"A carta trunfo ganhou"<<endl;
-                    cout<<"Vencedor da rodada: CPU"<<endl;
-                    CPU.Append(P1_Card);
-                    CPU.Append(CPU_Card);
-                }
-            }
-            if (turno==0) turno = 1;
-            else turno = 0;
+            TrunfoRound(P1,CPU,P1_Card,CPU_Card,turno);
         }
     }
 }
