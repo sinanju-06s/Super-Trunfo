@@ -223,6 +223,9 @@ void StartGame(Deck &P1, Deck &CPU){
             TrunfoRound(P1,CPU,P1_Card,CPU_Card,turno);
         }
     }
+    cout<<"Fim de jogo"<<endl;
+    cout<<"Cartas Player:"<<P1.Size()<<endl;
+    cout<<"Cartas CPU: "<<CPU.Size()<<endl;
 }
 
 int main(){
