@@ -27,7 +27,7 @@ void ReadAllCards(Card master_deck[])
         temp_card.horsepower = stoi(tmp);
         getline(Archive, tmp, ',');
         temp_card.price = stoi(tmp);
-        getline(Archive, tmp);
+        getline(Archive, tmp,'\n');
         temp_card.group = tmp;
         master_deck[i] = temp_card;
         i++;
