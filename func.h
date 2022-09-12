@@ -142,7 +142,7 @@ void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
 
     cout << "Opção Escolhida: " << mychoices[choice-1] << endl;
     cout << "Player value:" << P1_Card.generalize[choice-1] << endl;
-    cout << "CPU value:" << CPU_Card.generalize[choice] << endl;
+    cout << "CPU value:" << CPU_Card.generalize[choice-1] << endl;
     if (P1_Card.generalize[choice-1] > CPU_Card.generalize[choice-1])
     {
         cout << "Player ganhou a rodada" << endl;
