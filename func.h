@@ -31,6 +31,7 @@ void ReadAllCards(Card master_deck[])
         temp_card.group = tmp;
         master_deck[i] = temp_card;
         i++;
+        temp_card.Refresh();
     }
     cout << "fim " << endl;
 }
@@ -140,9 +141,9 @@ void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
     mychoices[3] = "Horsepower";
 
     cout << "Opção Escolhida: " << mychoices[choice] << endl;
-    cout << "Player value:" << *P1_Card.pointer[choice] << endl;
-    cout << "CPU value:" << *CPU_Card.pointer[choice] << endl;
-    if (*P1_Card.pointer[choice] > *CPU_Card.pointer[choice])
+    cout << "Player value:" << P1_Card.generalize[choice] << endl;
+    cout << "CPU value:" << CPU_Card.generalize[choice] << endl;
+    if (P1_Card.generalize[choice] > CPU_Card.generalize[choice])
     {
         cout << "Player ganhou a rodada" << endl;
         P1.Append(CPU_Card);

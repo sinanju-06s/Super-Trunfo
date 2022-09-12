@@ -10,13 +10,13 @@ struct Card
 {   
     string model, group;
     int curb_weigth, engine_size, horsepower, price;
-    int *pointer[3];
-    Card()
+    int generalize[4];
+    void Refresh()
     {
-        int i=0;
-        pointer[i++] = &curb_weigth;
-        pointer[i++] = &engine_size;
-        pointer[i++] = &horsepower;
+        //int i=0;
+        generalize[1] = curb_weigth;
+        generalize[2] = engine_size;
+        generalize[3] = horsepower;
     }
     
 };
