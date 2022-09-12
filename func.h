@@ -76,6 +76,7 @@ void ShowAllAtributes(Card x)
     cout << left << setw(20) << "(1) Curb-Weigth:" << left << setw(10) << x.curb_weigth << endl;
     cout << left << setw(20) << "(2) Engine-Size:" << left << setw(10) << x.engine_size << endl;
     cout << left << setw(20) << "(3) Horsepower:" << left << setw(10) << x.horsepower << endl;
+    cout << left << setw(20) << "(4) Price:" << left << setw(10) << x.price << endl;
     cout << fill << endl;
 }
 
@@ -139,8 +140,9 @@ void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
     mychoices[1] = "Curb-Weigth";
     mychoices[2] = "Engine-Size";
     mychoices[3] = "Horsepower";
+    mychoices[4] = "Price";
 
-    cout << "Opção Escolhida: " << mychoices[choice-1] << endl;
+    cout << "Opção Escolhida: " << mychoices[choice] << endl;
     cout << "Player value:" << P1_Card.generalize[choice-1] << endl;
     cout << "CPU value:" << CPU_Card.generalize[choice-1] << endl;
     if (P1_Card.generalize[choice-1] > CPU_Card.generalize[choice-1])
@@ -165,12 +167,14 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
     {
         cout << "Rodada do Player" << endl;
         cin >> player_choice;
-        while (player_choice != (int)player_choice || player_choice < 0 || player_choice > 3)
+        while ( isdigit(player_choice) || player_choice < 1 || player_choice > 4)
         {
             setbuf(stdin, NULL);
             cin.clear();
             cout << "Valor inválido, Insira novamente.\n";
             cin >> player_choice;
+            setbuf(stdin, NULL);
+            cin.clear();
         }
         ShowChoice(player_choice, P1_Card, CPU_Card, P1, CPU);
         turno = 1;
