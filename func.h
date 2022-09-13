@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
-#include <map>
 #include <ios>
 #include <limits>
 
@@ -139,13 +138,9 @@ void TrunfoRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turno
 }
 void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
 {
-    map<int, string> mychoices;
-    mychoices[1] = "Curb-Weigth";
-    mychoices[2] = "Engine-Size";
-    mychoices[3] = "Horsepower";
-    mychoices[4] = "Price";
+    string mychoices[4] = {"Curb-Weigth","Engine-Size","Horsepower","Price"};
 
-    cout << "Opção Escolhida: " << mychoices[choice] << endl;
+    cout << "Opção Escolhida: " << mychoices[choice+1] << endl;
     cout << "Player value:" << P1_Card.generalize[choice-1] << endl;
     cout << "CPU value:" << CPU_Card.generalize[choice-1] << endl;
     if (P1_Card.generalize[choice-1] > CPU_Card.generalize[choice-1])
@@ -174,13 +169,8 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            //setbuf(stdin, NULL);
-            
-            //cin.clear();
-            //cin.ignore(INT_MAX);
             cout << "Valor inválido, Insira novamente.\n";
             cin >> player_choice;
-
         }
         ShowChoice(player_choice, P1_Card, CPU_Card, P1, CPU);
         turno = 1;
