@@ -4,6 +4,9 @@
 #include <string>
 #include <iomanip>
 #include <map>
+#include <ios>
+#include <limits>
+
 using namespace std;
 
 void ReadAllCards(Card master_deck[])
@@ -167,14 +170,17 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
     {
         cout << "Rodada do Player" << endl;
         cin >> player_choice;
-        while ( isdigit(player_choice) || player_choice < 1 || player_choice > 4)
+        while (player_choice != (int)player_choice || player_choice < 1 || player_choice > 4)
         {
-            setbuf(stdin, NULL);
             cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            //setbuf(stdin, NULL);
+            
+            //cin.clear();
+            //cin.ignore(INT_MAX);
             cout << "Valor inválido, Insira novamente.\n";
             cin >> player_choice;
-            setbuf(stdin, NULL);
-            cin.clear();
+
         }
         ShowChoice(player_choice, P1_Card, CPU_Card, P1, CPU);
         turno = 1;
