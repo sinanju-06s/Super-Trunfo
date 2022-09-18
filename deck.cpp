@@ -1,9 +1,9 @@
 #include "deck.h"
-#include<fstream>
-#include<string>
-#include<fstream>
-#include<stdlib.h>
-#include<time.h>
+#include <fstream>
+#include <string>
+#include <fstream>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -40,14 +40,13 @@ void Deck::Serve(Card &x)
 
 void Deck::debug()
 {
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count + 1; i++)
     {
-        cout << deck_queue[i].model << "|" <<deck_queue[i].curb_weigth <<"|"<< deck_queue[i].engine_size << "|" << 
-                deck_queue[i].horsepower << "|"  << deck_queue[i].price << "|" << deck_queue[i].group << endl;
-        
+        cout << deck_queue[i].model << "|" << deck_queue[i].curb_weigth << "|" << deck_queue[i].engine_size << "|" << deck_queue[i].horsepower << "|" << deck_queue[i].price << "|" << deck_queue[i].group << endl;
     }
-    cout << "Cartas no baralho: "<< Size() <<endl;
+    cout << "Cartas no baralho: " << Size() << endl;
 }
+
 bool Deck::Full()
 {
     return (count == Maxt);
@@ -58,6 +57,7 @@ bool Deck::Empty()
     return (count == 0);
 }
 
-int Deck::Size(){
+int Deck::Size()
+{
     return count;
 }
