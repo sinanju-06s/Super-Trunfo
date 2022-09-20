@@ -4,6 +4,7 @@
 #include <string>
 #include <iomanip>
 #include <limits>
+#include <unistd.h>
 using namespace std;
 
 // ReadAllCards(Card master_deck[]) recebe um vetor de Cards representando as cartas no deck, faz a leitura de todas as
@@ -73,9 +74,10 @@ void DivideCards(Card master_deck[], Deck &X, Deck &Y)
 // ShowAllAtributes(Card x) recebe uma Carta x e faz um print em todos os seus atributos.
 void ShowAllAtributes(Card x)
 {
-
+    
     string fill(30, '-');
-
+    
+    cout << "\033[36mPlayer card	\033[39m" << endl;
     cout << fill << endl;
     cout << "Group:" << right << setw(17) << x.group << endl;
     cout << left << setw(20) << "Model:" << left << setw(10) << x.model << endl;
@@ -83,6 +85,7 @@ void ShowAllAtributes(Card x)
     cout << left << setw(20) << "(2) Engine-Size:" << left << setw(10) << x.engine_size << endl;
     cout << left << setw(20) << "(3) Horsepower:" << left << setw(10) << x.horsepower << endl;
     cout << left << setw(20) << "(4) Price:" << left << setw(10) << x.price << endl;
+    cout << left << setw(10) << " "<< "\033[35m(5) EXIT\033[39m" << endl;
     cout << fill << endl;
 }
 
@@ -159,20 +162,26 @@ void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
     }
     string mychoices[4] = {"Curb-Weigth", "Engine-Size", "Horsepower", "Price"};
 
-    cout << "Opção Escolhida: " << mychoices[choice - 1] << endl;
-    cout << "Player value:" << P1_Card.generalize[choice - 1] << endl;
-    cout << "CPU value:" << CPU_Card.generalize[choice - 1] << endl;
+    cout << "\nOpção Escolhida: " << mychoices[choice - 1] << endl;
+    cout << "Player value: " << P1_Card.generalize[choice - 1] << endl;
+    cout << "CPU value: " << CPU_Card.generalize[choice - 1] << endl;
     if (P1_Card.generalize[choice - 1] > CPU_Card.generalize[choice - 1])
     {
-        cout << "Player ganhou a rodada" << endl;
+        cout << "\033[32mPlayer ganhou a rodada\033[39m" << endl;
         P1.Append(CPU_Card);
         P1.Append(P1_Card);
+        cout << "\n5 segundos para o proximo turno" << endl;
+       
+        sleep(5);
     }
     else
     {
-        cout << "CPU ganhou a rodada" << endl;
+        cout << "\033[31mCPU ganhou a rodada\033[39m" << endl;
         CPU.Append(P1_Card);
         CPU.Append(CPU_Card);
+        cout << "\n5 segundos para o proximo turno" << endl;
+    
+        sleep(5);
     }
 }
 
@@ -183,10 +192,12 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
 
     if (turno == 0)
     {
-        cout << "Rodada do Player" << endl;
+        cout << "Rodada do Player - Escolha uma Opção !!! "<< endl;
         cin >> player_choice;
         while (!(int)player_choice || player_choice < 1 || player_choice > 5)
         {
+            system("clear");
+            ShowAllAtributes(P1_Card);
             cout << "Valor inválido, Insira novamente.\n";
             setbuf(stdin, NULL);
             cin.clear();
@@ -206,15 +217,16 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
     }
     else
     {
-        cout << "Rodada da CPU" << endl;
-        cout << "Digite qualquer coisa para continuar" << endl;
         cin.clear();
         setbuf(stdin, NULL);
+        cout << "\033[31mRodada da CPU\033[39m" << endl;
+        cout << "Digite \033[35m5\033[39m para sair ou qualquer coisa para continuar" << endl;
         cin >> tmp;
+        if(tmp == "5"){abort();}
         cin.clear();
         setbuf(stdin, NULL);
         int CPU_choice;
-        CPU_choice = rand() % 3 + 1;
+        CPU_choice = rand() % 4 + 1;
         ShowChoice(CPU_choice, P1_Card, CPU_Card, P1, CPU);
         turno = 0;
     }
@@ -238,7 +250,8 @@ void StartGame(Deck &P1, Deck &CPU)
         {
             TrunfoRound(P1, CPU, P1_Card, CPU_Card, turno);
         }
-        cout << "Cartas Player Atual: " << P1.Size() << endl;
+        system("clear");
+        cout << "\nCartas Player Atual: " << P1.Size() << endl;
         cout << "Cartas CPU Atual: " << CPU.Size() << endl;
     }
     cout << "Fim de jogo" << endl;

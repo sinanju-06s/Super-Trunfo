@@ -12,7 +12,7 @@ struct Card
     int generalize[4];
     void Refresh()
     {
-        int i = -1;
+        int i = 0;
         generalize[i++] = curb_weigth;
         generalize[i++] = engine_size;
         generalize[i++] = horsepower;
