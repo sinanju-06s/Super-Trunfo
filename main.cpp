@@ -38,6 +38,7 @@
  * 
  */
 #include "deck.h"
+#include "func.h"
 #include<fstream>
 #include<string>
 #include<iomanip>
@@ -50,9 +51,8 @@ int main(){
     
     Deck P1,CPU;
     DivideCards(MASTER_DECK,P1,CPU);
-    cout<<"Tamanho do Deck P1: "<<P1.Size()<<endl;
-    cout<<"Tamanho do Deck CPU: "<<CPU.Size()<<endl;
-    StartGame(P1,CPU);
+
+    Menu(P1,CPU);
 
     return 0;
 }

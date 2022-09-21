@@ -1,5 +1,6 @@
 #include <iostream>
 #include "deck.h"
+#include "func.h"
 #include <fstream>
 #include <string>
 #include <iomanip>
@@ -156,7 +157,8 @@ void TrunfoRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turno
 void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
 {   
     if (choice == 5)
-    {
+    {   
+        system("clear");
         cout<<"Opção Escolhida: "<<choice<<endl<<"Encerrando o jogo..."<<endl;
         abort();
     }
@@ -185,6 +187,13 @@ void ShowChoice(int choice, Card &P1_Card, Card &CPU_Card, Deck &P1, Deck &CPU)
     }
 }
 
+// Função recebe como info dos dois deck e duas cartas que estavão anteriormente no topo do deck, alem do turno
+// que verifica se é do jogador,0, ou maquina ,1.
+// Quando é o turno do jogador permite que ele escolha entre 4 atributos de sua carta ou sai do jogo,
+// ao escolher algum atributo o valor é passado para a função ShowChoice que mostra o resultada da verificação das cartas.
+// Quando o turno é da maquina temos apenas duas escolhas colocar qualquer valor ou inserir 5 para sair do programa.
+// A escolha da maquina é aleatoria e é chamada a ShowChoice para mostrar o vencedor.
+// A variavel turno sempre troca para o valor oposto ao inicial no fim da funçao
 void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turno)
 {
     int player_choice;
@@ -202,14 +211,6 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
             setbuf(stdin, NULL);
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            /*if(cin.fail())
-            {
-                cout << endl << "Input exceeds variable size. Please try again." << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-            } // end fail check*/
-
-            // setbuf(stdin,NULL);
             cin >> player_choice;
         }
         ShowChoice(player_choice, P1_Card, CPU_Card, P1, CPU);
@@ -231,9 +232,12 @@ void RegularRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turn
         turno = 0;
     }
 }
-
+// Função startGame inicia o jogo pegando os dois baralhos e gerando aleatorio o primeiro jogador.
+// Essa funçao tem foco principal de chamar todas as outras funções como ShowAllAtributes, CheckTrunfo,
+// RegularRound e TrunfoRound além dela fazer a checagem para ver se o jogo acabou e mostrar o jogador vencedor.
 void StartGame(Deck &P1, Deck &CPU)
 {
+    system("clear");
     Card P1_Card, CPU_Card;
     bool turno = rand() % 2;
 
@@ -255,4 +259,15 @@ void StartGame(Deck &P1, Deck &CPU)
         cout << "Cartas CPU Atual: " << CPU.Size() << endl;
     }
     cout << "Fim de jogo" << endl;
+}
+
+void Menu(Deck &P1, Deck &CPU)
+{
+    system("clear");
+    int answer;
+    cout << "Bem vindo ao super trunfo." << endl;
+    cout << "Deseja iniciar o jogo ? \n[1]Sim [Resto]Não" << endl; 
+    cin >> answer;
+    if(answer == 1){ StartGame(P1,CPU);}
+    else {abort();}
 }
