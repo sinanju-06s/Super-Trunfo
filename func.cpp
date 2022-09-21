@@ -136,6 +136,10 @@ void TrunfoRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turno
             cout << "Vencedor da rodada: Player" << endl;
             P1.Append(CPU_Card);
             P1.Append(P1_Card);
+            
+            cout << "\n5 segundos para o proximo turno" << endl;
+        
+            sleep(5);
         }
         else
         {
@@ -143,6 +147,10 @@ void TrunfoRound(Deck &P1, Deck &CPU, Card &P1_Card, Card &CPU_Card, bool &turno
             cout << "Vencedor da rodada: CPU" << endl;
             CPU.Append(P1_Card);
             CPU.Append(CPU_Card);
+
+            cout << "\n5 segundos para o proximo turno" << endl;
+       
+            sleep(5);
         }
     }
     if (turno == 0)
@@ -259,6 +267,14 @@ void StartGame(Deck &P1, Deck &CPU)
         cout << "Cartas CPU Atual: " << CPU.Size() << endl;
     }
     cout << "Fim de jogo" << endl;
+    if(P1.Size() == Maxt)
+    {
+        cout << "Player Wins" << endl;
+    }
+    else 
+    {
+        cout << "CPU Wins" << endl;
+    }
 }
 
 void Menu(Deck &P1, Deck &CPU)

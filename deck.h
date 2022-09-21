@@ -35,6 +35,5 @@ public:
     bool Empty();
     bool Full();
     int Size();
-    void debug();
 };
 #endif
